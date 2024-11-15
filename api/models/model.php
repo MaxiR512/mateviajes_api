@@ -6,28 +6,17 @@ class Model {
 
     protected $db;
     
-    public function __construct() {
-        
-        global $configuracion;
-        
-        $user = $configuracion['usuario'];
-        $password = $configuracion['password'];
-        $database = $configuracion['basenombre'];
-        $host = $configuracion['host'];
-        $this->db = new PDO("mysql:host=$host;dbname=$database;charset=utf8",$user,$password);
-        $this->deploy();
-    }
-
     protected function crearConexion() {
-            
+        
         global $configuracion;
-
+        
         $user = $configuracion['usuario'];
         $password = $configuracion['password'];
         $database = $configuracion['basenombre'];
         $host = $configuracion['host'];
         try {
             $pdo = new PDO("mysql:host=$host;dbname=$database;charset=utf8", $user, $password);
+            $this->deploy();
         } catch (\Throwable $th) {
             die($th);
             }
