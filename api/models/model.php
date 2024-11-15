@@ -102,7 +102,7 @@ class Model {
             --
 
             INSERT INTO `usuarios` (`id`, `usuario`, `password`) VALUES
-            (1, 'webadmin', $hashed_password);
+            (1, 'webadmin', '$hashed_password');
 
             -- --------------------------------------------------------
 
