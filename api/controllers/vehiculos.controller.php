@@ -60,4 +60,35 @@ class VehiculosController {
             $this->view->response("Acceso denegado",401);
         }
     }
+
+    public function agregarVehiculo(){
+        if($this->usercontroller->auth_basic()){
+            $nuevo = $this->getData();
+            
+            if(!isset($nuevo->marca) || empty($nuevo->marca)){
+                $this->view->response("No se agrega porque el campo << Marca >> esta vacío",400 );
+                return;
+            }
+            if(!isset($nuevo->modelo) || empty($nuevo->modelo)){
+                $this->view->response("No se agrega porque el campo << Modelo >> esta vacío",400 );
+                return;
+            }
+            if(!isset($nuevo->anio) || empty($nuevo->anio)){
+                $this->view->response("No se agrega porque el campo << Año >> esta vacío",400 );
+                return;
+            }
+            if(!isset($nuevo->patente) || empty($nuevo->patente)){
+                $this->view->response("No se agrega porque el campo << Patente >> esta vacío",400 );
+                return;
+            }
+            if(!isset($nuevo->asientos) || empty ($nuevo->asientos)){
+                $this->view->response("No se agrega porque el campo << Asientos >> esta vacío",400 );
+                return;
+            }
+                $this->model->crearvehiculo($nuevo->marca, $nuevo->modelo, $nuevo->anio, $nuevo->patente, $nuevo->asientos);
+                $this->view->response("Vehiculo creado con éxito",201);
+        }else{
+            $this->view->response("Acceso denegado",401);
+        }
+    }
 }

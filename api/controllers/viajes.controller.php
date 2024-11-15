@@ -48,4 +48,43 @@ class ViajesController {
             $this->view->response("Viaje no encontrado",404);
         }
     }
+
+    public function agregarViaje(){
+        if($this->usercontroller->auth_basic()){
+            $nuevo = $this->getData();
+            
+            if(!isset($nuevo->destino) || empty($nuevo->destino)){
+                $this->view->response("No se agrega porque el campo << Destino >> esta vacío",400 );
+                return;
+            }
+            if(!isset($nuevo->fecha) || empty($nuevo->fecha)){
+                $this->view->response("No se agrega porque el campo << Fecha >> esta vacío",400 );
+                return;
+            }
+            if(!isset($nuevo->horario) || empty($nuevo->horario)){
+                $this->view->response("No se agrega porque el campo << Horario >> esta vacío",400 );
+                return;
+            }
+            if(!isset($nuevo->pasajeros) || empty($nuevo->pasajeros)){
+                $this->view->response("No se agrega porque el campo << Pasajeros >> esta vacío",400 );
+                return;
+            }
+            if(!isset($nuevo->fk_vehiculo) || empty($nuevo->fk_vehiculo)){
+                $this->view->response("No se agrega porque el campo << Vehículo >> esta vacío",400 );
+                return;
+            }
+            if(!($this->modelVehiculos->getVehiculoById($nuevo->fk_vehiculo))){
+                $this->view->response("No existe el vehiculo",400 );
+                return;
+            }
+            if(!isset($nuevo->descripcion) || empty ($nuevo->descripcion)){
+                $this->view->response("No se agrega porque el campo << Info >> esta vacío",400 );
+                return;
+            }
+            $this->modelViajes->crearviaje($nuevo->destino, $nuevo->fecha, $nuevo->horario, $nuevo->pasajeros, $nuevo->fk_vehiculo, $nuevo->descripcion);
+            $this->view->response("Viaje creado con éxito",201);
+        }else{
+            $this->view->response("Acceso denegado",401);
+        }
+    }
 }

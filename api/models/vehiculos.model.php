@@ -5,9 +5,12 @@ require_once('model.php');
 class VehiculosModel extends Model {
     
     public function getVehiculos($filtro=null, $orden=null, $limit=null, $pag){
-        $offset = ($pag -1) * $limit;
         $pdo = $this->crearConexion();
+        
         $sql = "SELECT * FROM vehiculos";
+        
+        $offset = ($pag -1) * $limit;
+        
         if ($filtro){
             $sql .= " WHERE $filtro";
         }
@@ -17,6 +20,7 @@ class VehiculosModel extends Model {
         if($limit){
             $sql .= " LIMIT $limit OFFSET $offset";
         }
+        
         $query = $pdo->prepare($sql);
         try {
             $query->execute();
@@ -29,7 +33,9 @@ class VehiculosModel extends Model {
 
     public function getVehiculoById($id_vehiculo){
         $pdo = $this->crearConexion();
+
         $sql = "SELECT * FROM vehiculos WHERE id = ?";
+        
         $query = $pdo->prepare($sql);
         $query->execute([$id_vehiculo]);
         $vehiculo = $query->fetch(PDO::FETCH_OBJ);
@@ -37,11 +43,25 @@ class VehiculosModel extends Model {
     }
 
     public function deleteAutomovilById($id){
-        $pDO = $this->crearConexion();
+        $pdo = $this->crearConexion();
         $sql = 'DELETE FROM vehiculos WHERE id=?';
-        $query = $pDO->prepare($sql);
+        $query = $pdo->prepare($sql);
         try {
             $query->execute([$id]);
+        } catch (\Throwable $th) {
+            return null;
+        }
+    }
+
+    public function crearvehiculo($marca, $modelo, $anio, $patente, $asientos){
+        $pdo = $this->crearConexion();
+        
+        $sql = 'INSERT INTO vehiculos (marca,modelo,anio,patente,asientos) 
+                VALUES (?,?,?,?,?)';
+
+        $query = $pdo->prepare($sql);
+        try {
+            $query->execute([$marca, $modelo, $anio, $patente, $asientos]);
         } catch (\Throwable $th) {
             return null;
         }

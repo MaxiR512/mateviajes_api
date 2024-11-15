@@ -5,9 +5,12 @@
     class ViajesModel extends Model {
 
     public function getViajes($filtro=null, $orden=null, $limit=null, $pag){
-        $offset = ($pag -1) * $limit;
         $pdo = $this->crearConexion();
+        
         $sql = "SELECT * FROM viajes";
+        
+        $offset = ($pag -1) * $limit;
+        
         if($filtro) {
             $sql .= " WHERE $filtro";
         }
@@ -17,8 +20,8 @@
         if($limit){
             $sql .= " LIMIT $limit OFFSET $offset";
         }
+        
         $query = $pdo->prepare($sql);
-        $query->execute();
         try {
             $query->execute();
             $viajes = $query->fetchAll(PDO::FETCH_OBJ);
@@ -26,9 +29,6 @@
         } catch (\Throwable $th) {
             return null;
         }
-        $viajes = $query->fetchAll(PDO::FETCH_OBJ);
-    
-        return $viajes;
     }
 
     public function getViajeById($id_destino){
@@ -38,5 +38,19 @@
         $query->execute([$id_destino]);
         $viaje = $query->fetch(PDO::FETCH_OBJ);
         return $viaje;
+    }
+
+    public function crearviaje($destino, $fecha, $horario, $pasajeros, $vehiculo, $info){
+        $pdo = $this->crearConexion();
+        
+        $sql = 'INSERT INTO viajes (destino, fecha, horario, pasajeros, fk_vehiculo, descripcion) 
+                VALUES (?,?,?,?,?,?)';
+
+        $query = $pdo->prepare($sql);
+        try {
+            $query->execute([$destino, $fecha, $horario, $pasajeros, $vehiculo, $info]);
+        } catch (\Throwable $th) {
+            return null;
+        }
     }
 }
