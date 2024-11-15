@@ -26,5 +26,14 @@
                 return false;
             }
         }
+
+        public function getVehiculoById($id_vehiculo){
+            $pdo = $this->crearConexion();
+            $sql = "SELECT * FROM vehiculos WHERE id = ?";
+            $query = $pdo->prepare($sql);
+            $query->execute([$id_vehiculo]);
+            $vehiculo = $query->fetch(PDO::FETCH_OBJ);
+            return $vehiculo;
+        }
     
     }

@@ -21,4 +21,12 @@
         return $viajes;
     }
 
+    public function getViajeById($id_destino){
+        $pdo = $this->crearConexion();
+        $sql = "SELECT * FROM viajes WHERE id = ?";
+        $query = $pdo->prepare($sql);
+        $query->execute([$id_destino]);
+        $viaje = $query->fetch(PDO::FETCH_OBJ);
+        return $viaje;
+    }
 }

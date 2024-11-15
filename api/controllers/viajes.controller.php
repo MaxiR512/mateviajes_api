@@ -39,4 +39,14 @@ class ViajesController {
     $viajes = $this->modelViajes->getViajes($filtro, $orden);
         $this->view->response($viajes, 200);
     }
+
+    public function obtenerViajeByID($params) {
+        $id = $params [':ID'];
+        $viaje = $this->modelViajes->getViajeById($id);
+        if($viaje) {
+            $this->view->response($viaje,200);
+        } else {
+            $this->view->response("Viaje no encontrado",404);
+        }
+    }
 }

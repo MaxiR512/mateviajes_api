@@ -7,7 +7,11 @@
     $router = new Router();
 
     $router->addRoute('vehiculos', 'GET', 'VehiculosController', 'obtenerVehiculos');
+    $router->addRoute('vehiculos/:ID', 'GET', 'VehiculosController', 'obtenerVehiculoByID');
+
 
     $router->addRoute('viajes', 'GET', 'ViajesController', 'obtenerViajes');
+    $router->addRoute('viajes/:ID', 'GET', 'ViajesController', 'obtenerViajeByID');
+
 
     $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);

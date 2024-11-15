@@ -36,4 +36,14 @@ class VehiculosController {
         }
     }
 
+    public function obtenerVehiculoByID($params){
+        $id = $params [':ID'];
+        $vehiculo= $this->model->getVehiculoById($id);
+        if($vehiculo){
+        $this->view->response($vehiculo,200);
+    }
+    else{
+            $this->view->response("vehiculo no encontrado",404);
+        }
+    }
 }
