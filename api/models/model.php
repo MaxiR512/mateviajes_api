@@ -37,7 +37,7 @@ class Model {
             -- https://www.phpmyadmin.net/
             --
             -- Servidor: 127.0.0.1
-            -- Tiempo de generación: 14-11-2024 a las 22:08:53
+            -- Tiempo de generación: 15-11-2024 a las 23:27:14
             -- Versión del servidor: 10.4.32-MariaDB
             -- Versión de PHP: 8.2.12
 
@@ -58,6 +58,36 @@ class Model {
             -- --------------------------------------------------------
 
             --
+            -- Estructura de tabla para la tabla `comentarios`
+            --
+
+            CREATE TABLE `comentarios` (
+            `id` int(11) NOT NULL,
+            `usuario` varchar(50) NOT NULL,
+            `resenia` varchar(300) NOT NULL
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+            --
+            -- Volcado de datos para la tabla `comentarios`
+            --
+
+            INSERT INTO `comentarios` (`id`, `usuario`, `resenia`) VALUES
+            (1, 'viajero_aventurero', 'Excelente experiencia. Los destinos superaron mis expectativas, especialmente las visitas guiadas. Todo muy bien organizado. ¡Recomiendo 100%!'),
+            (2, 'carolina88', 'El servicio de transporte fue puntual y cómodo. Las combis estaban limpias y bien equipadas. ¡Me encantó el viaje a Mendoza!'),
+            (3, 'explorador10', 'El itinerario a Tigre fue espectacular, pero me hubiera gustado más tiempo para explorar los mercados locales. Aun así, muy recomendable.'),
+            (4, 'juanito_viajes', 'Gran atención al cliente. Me ayudaron a resolver dudas antes del viaje y todo salió como esperaba. Las Salinas son impresionantes.'),
+            (5, 'maria_123', 'Contraté el paquete a El Bolsón y quedé maravillada. Los paisajes son únicos. El guía muy amable y conocedor de la zona.'),
+            (6, 'roberto_ruta', 'Los Esteros de Iberá son un paraíso natural. El transporte fue muy cómodo, pero la comida en las paradas podría mejorar un poco. ¡Volvería!'),
+            (7, 'viajero_aventurero', 'El viaje a El Chaltén fue increíble. Los paisajes son de otro mundo y las caminatas muy bien organizadas. ¡Recomiendo 100%!'),
+            (8, 'carolina88', 'Los Esteros de Iberá son un destino que hay que visitar al menos una vez. Transporte cómodo y guías muy atentos. ¡Gran experiencia!'),
+            (9, 'explorador10', 'Disfruté mucho la excursión a La Plata. La catedral y los museos son impresionantes, aunque me hubiera gustado más tiempo para recorrer.'),
+            (10, 'juanito_viajes', 'Las Salinas fueron uno de los paisajes más únicos que he visto. La atención del personal fue excelente. ¡Volvería sin dudarlo!'),
+            (11, 'maria_123', 'Puerto Madryn es el lugar perfecto para los amantes de la naturaleza. Ver ballenas tan cerca fue inolvidable. ¡Muy recomendado!'),
+            (12, 'roberto_ruta', 'El tour al Glaciar Perito Moreno fue mágico. El guía explicó todo con detalle, y el paisaje es impresionante. ¡Un viaje perfecto!');
+
+            -- --------------------------------------------------------
+
+            --
             -- Estructura de tabla para la tabla `usuarios`
             --
 
@@ -72,7 +102,8 @@ class Model {
             --
 
             INSERT INTO `usuarios` (`id`, `usuario`, `password`) VALUES
-            (1, 'webadmin', '$hashed_password');
+            (1, 'webadmin', $hashed_password);
+
             -- --------------------------------------------------------
 
             --
@@ -176,6 +207,12 @@ class Model {
             --
 
             --
+            -- Indices de la tabla `comentarios`
+            --
+            ALTER TABLE `comentarios`
+            ADD PRIMARY KEY (`id`);
+
+            --
             -- Indices de la tabla `usuarios`
             --
             ALTER TABLE `usuarios`
@@ -197,6 +234,12 @@ class Model {
             --
             -- AUTO_INCREMENT de las tablas volcadas
             --
+
+            --
+            -- AUTO_INCREMENT de la tabla `comentarios`
+            --
+            ALTER TABLE `comentarios`
+            MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
             --
             -- AUTO_INCREMENT de la tabla `usuarios`
@@ -230,6 +273,7 @@ class Model {
             /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
             /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
             /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
 
                 ";
         $this->db->query($sql);
