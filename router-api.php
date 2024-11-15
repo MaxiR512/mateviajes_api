@@ -8,6 +8,7 @@
 
     $router->addRoute('vehiculos', 'GET', 'VehiculosController', 'obtenerVehiculos');
     $router->addRoute('vehiculos/:ID', 'GET', 'VehiculosController', 'obtenerVehiculoByID');
+    $router->addRoute('vehiculos/:ID', 'DELETE', 'VehiculosController', 'borrarVehiculo');
 
 
     $router->addRoute('viajes', 'GET', 'ViajesController', 'obtenerViajes');

@@ -46,4 +46,18 @@ class VehiculosController {
             $this->view->response("vehiculo no encontrado",404);
         }
     }
+
+    public function borrarVehiculo($params){
+        if($this->usercontroller->auth_basic()){
+            $id = $params [':ID'];
+            if($this->model->getVehiculoById($id)){
+                $this->model->deleteVehiculoById($id);
+                $this->view->response("Vehiculo eliminado con exito",200);
+            }else{
+                $this->view->response("Vehiculo no encontrado",404);
+            }
+        }else{
+            $this->view->response("Acceso denegado",401);
+        }
+    }
 }
