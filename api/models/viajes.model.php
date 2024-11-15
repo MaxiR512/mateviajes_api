@@ -4,7 +4,8 @@
 
     class ViajesModel extends Model {
 
-    public function getViajes($filtro=null, $orden=null){
+    public function getViajes($filtro=null, $orden=null, $limit=null, $pag){
+        $offset = ($pag -1) * $limit;
         $pdo = $this->crearConexion();
         $sql = "SELECT * FROM viajes";
         if($filtro) {
@@ -13,9 +14,18 @@
         if($orden) {
             $sql .= " ORDER BY $orden";
         }
+        if($limit){
+            $sql .= " LIMIT $limit OFFSET $offset";
+        }
         $query = $pdo->prepare($sql);
         $query->execute();
-    
+        try {
+            $query->execute();
+            $viajes = $query->fetchAll(PDO::FETCH_OBJ);
+            return $viajes;
+        } catch (\Throwable $th) {
+            return null;
+        }
         $viajes = $query->fetchAll(PDO::FETCH_OBJ);
     
         return $viajes;

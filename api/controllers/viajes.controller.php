@@ -26,18 +26,17 @@ class ViajesController {
     }
 
     public function obtenerViajes() {
-        if(isset($_GET['orderBy'])){
-            $orden = $_GET ['orderBy'];
+        $filtro = isset($_GET['filter']) ? $_GET['filter'] : null;
+        $orden = isset($_GET['orderBy']) ? $_GET['orderBy'] : null;
+        $limit = isset($_GET['limit']) ? $_GET['limit'] : null;
+        $pag = isset($_GET['page']) ? $_GET['page'] : 1;
+        if($viajes = $this->modelViajes->getViajes($filtro, $orden, $limit, $pag)){
+            $cantidad= count($viajes);
+            $this->view->response("Se muestra/ n << ".$cantidad." >> resultado/ s",200);
+            $this->view->response($viajes,200);
         }else{
-                $orden=null;
+            $this->view->response("No hay elementos para mostrar, revisar los params",400);
         }
-        if(isset($_GET['filter'])){
-            $filtro = $_GET ['filter'];
-        }else{
-                $filtro=null;
-        }
-    $viajes = $this->modelViajes->getViajes($filtro, $orden);
-        $this->view->response($viajes, 200);
     }
 
     public function obtenerViajeByID($params) {
