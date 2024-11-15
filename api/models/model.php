@@ -37,7 +37,7 @@ class Model {
             -- https://www.phpmyadmin.net/
             --
             -- Servidor: 127.0.0.1
-            -- Tiempo de generación: 15-11-2024 a las 23:27:14
+            -- Tiempo de generación: 15-11-2024 a las 23:51:36
             -- Versión del servidor: 10.4.32-MariaDB
             -- Versión de PHP: 8.2.12
 
@@ -102,7 +102,7 @@ class Model {
             --
 
             INSERT INTO `usuarios` (`id`, `usuario`, `password`) VALUES
-            (1, 'webadmin', $hashed_password);
+            (1, 'webadmin', '$hashed_password');
 
             -- --------------------------------------------------------
 
@@ -273,8 +273,6 @@ class Model {
             /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
             /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
             /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-
                 ";
         $this->db->query($sql);
         }
