@@ -41,8 +41,8 @@ class VehiculosModel extends Model {
         $vehiculo = $query->fetch(PDO::FETCH_OBJ);
         return $vehiculo;
     }
-
-    public function deleteAutomovilById($id){
+    // probar si anda, estaba cambiado el nombre del metodo
+    public function deleteVehiculoById($id){
         $pdo = $this->crearConexion();
         $sql = 'DELETE FROM vehiculos WHERE id=?';
         $query = $pdo->prepare($sql);
@@ -62,6 +62,21 @@ class VehiculosModel extends Model {
         $query = $pdo->prepare($sql);
         try {
             $query->execute([$marca, $modelo, $anio, $patente, $asientos]);
+        } catch (\Throwable $th) {
+            return null;
+        }
+    }
+
+    public function updateVehiculo($marca, $modelo, $anio, $patente, $asientos, $id){
+        $pdo = $this->crearConexion();
+
+        $sql = 'UPDATE vehiculos SET marca = ?, modelo = ?, anio = ?, patente = ?, asientos = ? 
+                WHERE id = ?';
+
+        $query = $pdo->prepare($sql);
+        try {
+            $query->execute([$marca, $modelo, $anio, $patente, $asientos, $id]);
+            
         } catch (\Throwable $th) {
             return null;
         }

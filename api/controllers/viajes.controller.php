@@ -87,4 +87,66 @@ class ViajesController {
             $this->view->response("Acceso denegado",401);
         }
     }
+
+    public function borrarViaje($params) {
+        if($this->usercontroller->auth_basic()){
+        $id = $params [':ID'];
+        if ($this->modelViajes->getViajeById($id)){
+            $this->modelViajes->deleteDestinoById($id);
+            $this->view->response("Viaje eliminado con éxito", 200);
+        } else {
+            $this->view->response("Viaje no encontrado", 404);
+        }
+        }else{
+            $this->view->response("Acceso denegado",401);
+        }
+    }
+
+    public function actualizarViaje($params) {
+        if($this->usercontroller->auth_basic()){
+            $id = $params [':ID'];
+            
+            $nuevo = $this->getData();
+            $antiguo = $this->modelViajes->getViajeById($id);
+            
+            if(!isset($nuevo->destino) || empty($nuevo->destino)){
+                $nuevo->destino = $antiguo->destino;
+                $this->view->response("Se mantiene dato antiguo en <<" .$antiguo->destino." >> porque el campo está vacío",400 );
+                return;
+            }
+            if(!isset($nuevo->fecha) || empty($nuevo->fecha)){
+                $nuevo->fecha = $antiguo->fecha;
+                $this->view->response("Se mantiene dato antiguo en <<" .$antiguo->fecha." >> porque el campo está vacío",400 );
+                return;
+            }
+            if(!isset($nuevo->horario) || empty($nuevo->horario)){
+                $nuevo->horario = $antiguo->horario;
+                $this->view->response("Se mantiene dato antiguo en <<" .$antiguo->horario." >> porque el campo está vacío",400 );
+                return;
+            }
+            if(!isset($nuevo->pasajeros) || empty($nuevo->pasajeros)){
+                $nuevo->pasajeros = $antiguo->pasajeros;
+                $this->view->response("Se mantiene dato antiguo en <<" .$antiguo->pasajeros." >> porque el campo está vacío",400 );
+                return;
+            }
+            if(!isset($nuevo->fk_vehiculo) || empty($nuevo->fk_vehiculo)){
+                $nuevo->fk_vehiculo = $antiguo->fk_vehiculo;
+                $this->view->response("Se mantiene dato antiguo en <<" .$antiguo->fk_vehiculo." >> porque el campo está vacío",400 );
+                return;
+            }
+            if(!($this->modelVehiculos->getVehiculoById($nuevo->fk_vehiculo))){
+                $this->view->response("No existe el vehiculo",400 );
+                return;
+            }
+            if(!isset($nuevo->descripcion) || empty($nuevo->descripcion)){
+                $nuevo->descripcion = $antiguo->descripcion;
+                $this->view->response("Se mantiene dato antiguo en <<" .$antiguo->descripcion." >> porque el campo está vacío",400 );
+                return;
+            }
+            $this->modelViajes->updateViaje($nuevo->destino, $nuevo->fecha, $nuevo->horario, $nuevo->pasajeros, $nuevo->fk_vehiculo, $nuevo->descripcion, $id);
+            $this->view->response("Se actualizó el viaje con id: " . $id. " con los nuevos datos", 200);
+        }else{
+            $this->view->response("Acceso denegado",401);
+        }
+    }
 }

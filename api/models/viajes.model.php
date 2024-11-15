@@ -53,4 +53,34 @@
             return null;
         }
     }
+
+    public function deleteDestinoById($id_destino){
+        $pdo = $this->crearConexion();
+    
+        $sql = 'DELETE FROM viajes
+                WHERE id = ?';
+
+        $query = $pdo->prepare($sql);
+        try {
+            $query->execute([$id_destino]);
+        } catch (\Throwable $th) {
+            return null;
+        }
+    }
+
+    public function updateViaje($destino, $fecha, $horario, $pasajeros, $vehiculo, $info, $id){
+        $pdo = $this->crearConexion();
+
+        $sql = 'UPDATE viajes SET destino = ?, fecha = ?, horario = ?, pasajeros = ?, fk_vehiculo = ?, descripcion = ? 
+                WHERE id = ?';
+
+        $query = $pdo->prepare($sql);
+        try {
+            $query->execute([$destino, $fecha, $horario, $pasajeros, $vehiculo, $info, $id]);
+            
+        } catch (\Throwable $th) {
+            return null;
+        }
+    }
+
 }

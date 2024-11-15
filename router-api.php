@@ -10,11 +10,13 @@
     $router->addRoute('vehiculos/:ID', 'GET', 'VehiculosController', 'obtenerVehiculoByID');
     $router->addRoute('vehiculos/:ID', 'DELETE', 'VehiculosController', 'borrarVehiculo');
     $router->addRoute('vehiculos', 'POST', 'VehiculosController', 'agregarVehiculo');
-
+    $router->addRoute('vehiculos/:ID', 'PUT', 'VehiculosController', 'actualizarVehiculo');
 
     $router->addRoute('viajes', 'GET', 'ViajesController', 'obtenerViajes');
     $router->addRoute('viajes/:ID', 'GET', 'ViajesController', 'obtenerViajeByID');
+    $router->addRoute('viajes/:ID', 'DELETE', 'ViajesController', 'borrarViaje');
     $router->addRoute('viajes', 'POST', 'ViajesController', 'agregarViaje');
+    $router->addRoute('viajes/:ID', 'PUT', 'ViajesController', 'actualizarViaje');
 
 
     $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);

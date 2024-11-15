@@ -91,4 +91,44 @@ class VehiculosController {
             $this->view->response("Acceso denegado",401);
         }
     }
+
+    public function actualizarVehiculo($params){
+        if($this->usercontroller->auth_basic()){
+
+            $id = $params [':ID'];
+            $nuevo = $this->getData();
+            $antiguo= $this->model->getVehiculoById($id);
+
+            if(!isset($nuevo->marca) || empty($nuevo->marca)){
+                $nuevo->marca = $antiguo->marca;
+                $this->view->response("Se mantiene dato antiguo en << ".$antiguo->marca." >> porque el campo esta vacío",400 );
+                return;
+            }
+            
+            if(!isset($nuevo->modelo) || empty($nuevo->modelo)){
+                $nuevo->modelo = $antiguo->modelo;
+                $this->view->response("Se mantiene dato antiguo en << ".$antiguo->modelo." >> porque el campo esta vacío",400 );
+                return;
+            }
+            if(!isset($nuevo->anio) || empty($nuevo->anio)){
+                $nuevo->anio = $antiguo->anio;
+                $this->view->response("Se mantiene dato antiguo en << ".$antiguo->anio." >> porque el campo esta vacío",400 );
+                return;
+            }
+            if(!isset($nuevo->patente) || empty($nuevo->patente)){
+                $nuevo->patente = $antiguo->patente;
+                $this->view->response("Se mantiene dato antiguo en << ".$antiguo->patente." >> porque el campo esta vacío",400 );
+                return;
+            }
+            if(!isset($nuevo->asientos) || empty ($nuevo->asientos)){
+                $nuevo->asientos = $antiguo->asientos;
+                $this->view->response("Se mantiene dato antiguo en ".$antiguo->asientos." porque el campo esta vacío",400 );
+                return;
+            }
+            $this->model->updateVehiculo($nuevo->marca, $nuevo->modelo, $nuevo->anio, $nuevo->patente, $nuevo->asientos, $id);
+            $this->view->response("Se actualizó el vehiculo con id: ". $id . " - " .$nuevo->marca. " ".$nuevo->modelo." con los nuevos datos",200 );
+        }else{
+            $this->view->response("Acceso denegado",401);
+        }
+    }
 }
