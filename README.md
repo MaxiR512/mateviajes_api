@@ -1,5 +1,21 @@
 # Documentación de la API Mateviajes
 
+### Integrantes del grupo
+
+Barragán, Alba -->  albabarragan88@gmail.com  
+Rebainera, Maximiliano -->  maxi.reba@gmail.com 
+- - -
+>[!NOTE]
+   >
+   >Usuario -->  webadmin  
+    Contraseña --> admin
+
+La API implementa el paradigma ABM (Alta, Baja, Modificación), proporcionando un conjunto de endpoints RESTful que permiten realizar operaciones CRUD (Create, Read, Update, Delete) sobre las entidades principales del sistema:
+
+- Viajes: Registra y administra los viajes realizados, con detalles como fechas, horarios, destinos y asientos disponibles.
+- Vehículos: Permite gestionar el inventario de vehículos, incluyendo marca, modelo, año, patente y cantidad de asientos.
+- Comentarios: Facilita la gestión de llas reseñas que realizan distintos usuarios.
+
 ## Vehículos
 
 | Ruta                | Método | Controlador          | Acción                                      | Parámetros adicionales                                     |
