@@ -4,12 +4,14 @@
 
 Barragán, Alba -->  albabarragan88@gmail.com  
 Rebainera, Maximiliano -->  maxi.reba@gmail.com 
+
+Esta tercera entrega comparte la misma base de datos que las entegras anteriores `db_mateviajes`, con la distinción de haber agregado una tabla extra con comentarios sobre el sitio. También cuenta con un método autodeploy como la entrega anterior.
 - - -
 >[!NOTE]
    >
    >Usuario -->  webadmin  
     Contraseña --> admin
-
+- - -
 La API implementa el paradigma ABM (Alta, Baja, Modificación), proporcionando un conjunto de endpoints RESTful que permiten realizar operaciones CRUD (Create, Read, Update, Delete) sobre las entidades principales del sistema:
 
 - Viajes: Registra y administra los viajes realizados, con detalles como fechas, horarios, destinos y asientos disponibles.
