@@ -5,7 +5,7 @@
 Barragán, Alba -->  albabarragan88@gmail.com  
 Rebainera, Maximiliano -->  maxi.reba@gmail.com 
 
-Esta tercera entrega comparte la misma base de datos que las entegras anteriores `db_mateviajes`, con la distinción de haber agregado una tabla extra con comentarios sobre el sitio. También cuenta con un método autodeploy como la entrega anterior.
+Esta tercera entrega comparte la misma base de datos que las entegras anteriores `db_mateviajes`, con la distinción de haber agregado una tabla extra con comentarios sobre el sitio. También cuenta con un método Auto Deploy como la entrega anterior.
 - - -
 >[!NOTE]
    >
